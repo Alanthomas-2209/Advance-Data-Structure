@@ -1,162 +1,100 @@
-#include<conio.h>
+#include<stdio.h>
 #include<stdlib.h>
-#define MAX 10
+#define MAX 5
 
 int queue[MAX];
-int rear=-1,front=-1;
+int data,rear=-1,front=-1;
+
+int fullCheck(){
+	if((rear+1)%MAX == front || (front == 0 && rear == MAX-1))
+	{
+		return 1;
+	}
+	return 0;
+}
 
 void enQueue(){
-	if(front == rear+1 || (front == 0 && rear == MAX-1))
-		printf("Overflow.....! \n");
+	if(fullCheck())
+		printf(" Overflow.....! \n");
 	else
+		printf("Enter the data :");
+		scanf("%d",&data);
+		if (front == -1){
+			front = 0;
+		}
+    		rear = (rear + 1) % MAX;
+    		queue[rear] = data;
 }
 
-void traversal(){
-
+void Top(){
+	if(front == -1 && rear==-1){
+		printf("Queue is empty...! \n");
+	}
+	else{
+		printf("Front ->%d \n ",queue[front]);	
+	}
 }
-void front(){
 
+void display() {
+	int i;
+	if (front == -1 && rear==-1)
+   		printf("Queue is Empty....! \n");
+	else {
+    		printf("\n Items ->");
+    		for (i = front; i != rear; i = (i + 1) % MAX) {
+      			printf("%d ->", queue[i]);
+    		}
+    		printf("%d ", queue[i]);
+  	}
 }
 
-void rear(){
-
+void deQueue(){
+	if (front == -1 && rear==-1) {
+		printf("\n Queue is empty !! \n");
+  	} 
+  	else{
+  		data = queue[front]; 
+  		if(front==rear){
+  			front=rear=-1;
+  		}
+  		else{
+  			front = (front+1)%MAX;
+  		}
+  	}
+    	printf("\n Deleted element -> %d \n", data);
 }
-void dequeue(){
 
-}
-void main()
+void main(){
 	int choice;
-	printf("\n OPTIONS: \n1.Enqueue \n2.Display Queue\n3.Display Front\n4.Display Rear\n5.Dequeue\n0.Exit\n");
+	printf("\n OPTIONS: \n1.Enqueue \n2.Display Queue\n3.Display Front\n4.Dequeue\n0.Exit\n");
 	do{
-		
+		printf("\nEnter the choice :");
 		scanf("%d",&choice);
-
 		switch(choice){
 			case 1 : {
 					enQueue();
 					break;
 				 }
 			case 2 : {
-					traversal();
+					display();
 					break;
 				 }
 			case 3 : {
-					front();
+					Top();
 					break;
 				 }
 			case 4 : {
-					rear();
-					break;
-				 }
-			case 5 : {
 					deQueue();
 					break;
 				 }
 			case 0 : {
-					printf("Exiting....!\n");
+					printf("\nExiting....!\n");
 					break;
 				 }
 			default : {
-					printf("Wrong input\n");
+					printf("\nWrong input\n");
 					break;
 				  }
 		}
 	}while(choice != 0 );
 }
-/*// Circular Queue implementation in C
-
-#include <stdio.h>
-
-#define SIZE 5
-
-int items[SIZE];
-int front = -1, rear = -1;
-
-// Check if the queue is full
-int isFull() {
-  if ((front == rear + 1) || (front == 0 && rear == SIZE - 1)) return 1;
-  return 0;
-}
-
-// Check if the queue is empty
-int isEmpty() {
-  if (front == -1) return 1;
-  return 0;
-}
-
-// Adding an element
-void enQueue(int element) {
-  if (isFull())
-    printf("\n Queue is full!! \n");
-  else {
-    if (front == -1) front = 0;
-    rear = (rear + 1) % SIZE;
-    items[rear] = element;
-    printf("\n Inserted -> %d", element);
-  }
-}
-
-// Removing an element
-int deQueue() {
-  int element;
-  if (isEmpty()) {
-    printf("\n Queue is empty !! \n");
-    return (-1);
-  } else {
-    element = items[front];
-    if (front == rear) {
-      front = -1;
-      rear = -1;
-    } 
-    // Q has only one element, so we reset the 
-    // queue after dequeing it. ?
-    else {
-      front = (front + 1) % SIZE;
-    }
-    printf("\n Deleted element -> %d \n", element);
-    return (element);
-  }
-}
-
-// Display the queue
-void display() {
-  int i;
-  if (isEmpty())
-    printf(" \n Empty Queue\n");
-  else {
-    printf("\n Front -> %d ", front);
-    printf("\n Items -> ");
-    for (i = front; i != rear; i = (i + 1) % SIZE) {
-      printf("%d ", items[i]);
-    }
-    printf("%d ", items[i]);
-    printf("\n Rear -> %d \n", rear);
-  }
-}
-
-int main() {
-  // Fails because front = -1
-  deQueue();
-
-  enQueue(1);
-  enQueue(2);
-  enQueue(3);
-  enQueue(4);
-  enQueue(5);
-
-  // Fails to enqueue because front == 0 && rear == SIZE - 1
-  enQueue(6);
-
-  display();
-  deQueue();
-
-  display();
-
-  enQueue(7);
-  display();
-
-  // Fails to enqueue because front == rear + 1
-  enQueue(8);
-
-  return 0;
-}*/

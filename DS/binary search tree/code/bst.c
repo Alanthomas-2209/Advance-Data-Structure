@@ -126,11 +126,12 @@ void main(){
 			case 1 : {	
 					printf("How many data want to insert :");
 					scanf("%d",&n);
-					for(i=1;i<n;i++){
+					for(i=0;i<n;i++){
 						printf("Enter the data :");
 				    		scanf("%d",&data);
 						root=insertion(root,data);
 					}
+					break;
 				 } 
 			case 2 : {
 					printf("Enter the data :");

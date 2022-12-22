@@ -72,9 +72,16 @@ void topof()
 	}
 }
 void display()
-{
-	int i;
-	for(i=top;i>-1;i--)
-	printf("displaying element in stack %d \n",stack[i]);
+{	
+	if(top==-1)
+	{
+		printf("Stack is empty\n");
+	}
+	else
+	{
+		int i;
+		for(i=top;i>-1;i--)
+		printf("displaying element in stack %d \n",stack[i]);
+	}
 }
 

@@ -78,7 +78,7 @@ void top()
 	}
 	else
 	{
-		printf("%d\n",queue[front]);
+		printf("Front = %d\n",queue[front]);
 	}
 }
 void display()
@@ -90,11 +90,13 @@ void display()
 		printf("queue is empty\n");
 	}
 	else
-	{
+	{	
+		printf("Queue -> ");
 		for(i=front;i<=rear;i++)
 		{
-			printf("displaying element in queue %d \n",queue[i]);
+			printf(" %d ->",queue[i]);
 		}
+		printf(" NULL \n");
 	}
 	
 }
