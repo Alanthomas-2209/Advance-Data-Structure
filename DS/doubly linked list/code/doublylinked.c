@@ -10,6 +10,7 @@ void addbeg();
 void deleteend();
 void deletespec();
 void deletebeg();
+void reverse();
 
 int i,n;
 
@@ -22,10 +23,11 @@ struct node *newnode,*current,*temp,*head=NULL,*last=NULL;
 
 void main(){
 	int choice;
+	printf("OPTIONS\n 1:insertion\n 2:traversing\n 3:searching\n 4:addition at end \n 5:additon after a specific element\n 6:addtion at the beginning\n 7:deltion at the end\n 8:deletion after specific element\n 9:deletion at the beginning\n10:traverse in reverse\n0: Exit\n");
 	do{
-		printf("\nOPTIONS\n 1:insertion\n 2:traversing\n 3:searching\n 4:addition at end \n 5:additon after a specific element\n 6:addtion at the beginning\n 7:deltion at the end\n 8:deletion after specific element\n 9:deletion at the beginning  0: Exit\n");
+		printf("\nEnter the choice :\n");
 		scanf("%d",&choice);
-		switch(a)
+		switch(choice)
 		{
     			case 1:insertion();
     				break;
@@ -44,6 +46,8 @@ void main(){
     			case 8:deletespec();
     				break;
     			case 9:deletebeg();
+    				break;
+    			case 10:reverse();
     				break;
     			case 0:printf("Exiting\n");
    				 break;
@@ -82,14 +86,13 @@ void insertion()
 
 void traverse()
 {
-	printf("Linked list:");
 	if(head==NULL)
 	{
 		printf("Linked list is empty....!\n");
 	}
 	else
 	{
-		printf(" Doubly Linked list :");
+		printf("Doubly Linked list :");
 		for(current=head;current!=NULL;current=current->next)
 		{
 			printf("%d->",current->data);
@@ -186,6 +189,7 @@ void addbeg()
 	scanf("%d",&newnode->data);
 	newnode->prev=NULL;
 	newnode->next=head;
+	head->prev=newnode;
 	head=newnode;
 }
 
@@ -214,6 +218,7 @@ void deleteend()
 			}
 			printf("Deleted element :%d",ptr->data);
 			preptr->next=NULL;
+			last=preptr; //tracking the last node
 			free(ptr);
 		}
 	}	
@@ -239,7 +244,14 @@ void deletespec()
 			ptr=ptr->next;
 		}
 		temp=ptr->next;
-		printf("Deleted element :%d",temp->data);
+		printf("Deleted element :%d",temp->data); 
+		if(temp->next==NULL)
+		{
+			ptr->next=NULL;
+			last=ptr; // tracking last element
+			free(temp);
+			return;
+		}
 		ptr->next=temp->next;
 		temp->next->prev=ptr;
 		free(temp);
@@ -260,5 +272,19 @@ void deletebeg()
 		head=head->next;
 		head->prev=NULL;
 		free(ptr);
+	}
+}
+
+void reverse()
+{
+	if(head==NULL)
+		printf("Linked list is empty.....!");
+	else
+	{
+		for(current=last;current!=NULL;current=current->prev)
+		{
+			printf("%d->",current->data);
+		}
+		printf("NULL");
 	}
 }
