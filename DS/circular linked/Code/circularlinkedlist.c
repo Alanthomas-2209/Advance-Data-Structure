@@ -1,11 +1,13 @@
 #include<stdio.h>
 #include<stdlib.h>
-int i,n,flag=0;
-struct node
-{
-int data;
-struct node *next;
+
+int i,n;
+
+struct node{
+	int data;
+	struct node *next;
 };
+
 struct node *last=NULL,*current,*temp,*newnode;
 
 void insertion(){
@@ -29,27 +31,27 @@ void insertion(){
 		}
 	}
 }
+
 void traverse(){
-		int count=0;
-		if(last==NULL)
+	int count=0;
+	if(last==NULL){
+		printf("List is empty.....!\n");
+	}
+	else{
+		current=last->next;
+		do 
 		{
-			printf("List is empty.....!\n");
-		}
-		else
-		{
-			current=last->next;
-			do 
-			{
-				printf("%d->",current->data);
-				current=current->next;
-				count++;
-			}while(current!=last->next);
+			printf("%d->",current->data);
+			current=current->next;
+			count++;
+		}while(current!=last->next);
 		printf("NULL\n");
 		printf("Total elements in the data :%d\n",count);
-		}
+	}
 }
+
 void search(){
-	int item,pos=0;
+	int item,pos=0,flag=0;
 	if(last==NULL)
 	{
 		printf("Linked list is empty..!\n");
@@ -118,8 +120,9 @@ void addspec(){
 		ptr->next=newnode;
 	}
 }
+
 void addbeg(){
-newnode=(struct node*)malloc(sizeof(struct node));
+	newnode=(struct node*)malloc(sizeof(struct node));
 	printf("Enter the data\n");
 	scanf("%d",&newnode->data);
 	if(last==NULL)
@@ -133,6 +136,7 @@ newnode=(struct node*)malloc(sizeof(struct node));
 		last->next=newnode;
 	}
 }
+
 void deleteend(){
 	if(last==NULL)
 	{
@@ -156,6 +160,7 @@ void deleteend(){
 		last=current;
 	}
 }
+
 void deletespec(){
 	struct node *preptr,*ptr;
 	int item;
@@ -182,6 +187,7 @@ void deletespec(){
 		free(temp);
 	}
 }
+
 void deletebeg(){
 	if(last==NULL)
 	{
@@ -204,37 +210,36 @@ void deletebeg(){
 
 void main()
 {
-int a;
-do
-{
-printf("\nOPTIONS\n 1:insertion\n 2:traversing\n 3:searching\n 4:addition at end \n 5:additon after a specific element\n 6:addtion at the beginning\n 7:deltion at the end\n 8:deletion after specific element\n 9:deletion at the beginning  0: Exit\n");
-scanf("%d",&a);
-switch(a)
-{
-    case 1:insertion();
-    break;
-    case 2:traverse();
-    break;
-    case 3:search();
-    break;
-    case 4:addend();
-    break;
-    case 5:addspec();
-    break;
-    case 6:addbeg();
-    break;
-    case 7:deleteend();
-    break;
-    case 8:deletespec();
-    break;
-    case 9:deletebeg();
-    break;
-    case 0:printf("Exiting\n");
-    break;
-    default:printf("invalid Entry\n");
-    break;
-}
-
-}while(a!=0);
-
+	int choice;
+	do{
+		printf("\nOPTIONS\n 1:insertion\n 2:traversing\n 3:searching\n 4:addition at end \n 5:additon after a specific element\n 6:addtion at the beginning\n 7:deltion at the end\n 8:deletion after specific element\n 9:deletion at the beginning  0: Exit\n");
+		scanf("%d",&choice);
+		switch(choice)
+		{
+    			case 1:insertion();
+    				break;
+    				
+    			case 2:traverse();
+    				break;
+    			
+    			case 3:search();
+    				break;
+    			case 4:addend();
+    				break;
+    			case 5:addspec();
+    				break;
+    			case 6:addbeg();
+    				break;
+    			case 7:deleteend();
+    				break;
+    			case 8:deletespec();
+    				break;
+    			case 9:deletebeg();
+    				break;
+    			case 0:printf("Exiting\n");
+    				break;
+    			default: printf("invalid Entry\n");
+    				break;
+		}
+	}while(choice!=0);
 }

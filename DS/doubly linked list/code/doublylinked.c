@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+
 void insertion();
 void traverse();
 void search();
@@ -9,48 +10,47 @@ void addbeg();
 void deleteend();
 void deletespec();
 void deletebeg();
-int i,n,a;
-struct node
-{
-int data;
-struct node *next,*prev;
 
+int i,n;
+
+struct node{
+	int data;
+	struct node *next,*prev;
 };
-struct node *newnode,*current,*temp,*head=NULL;
-void main()
-{
-do
-{
-printf("\nOPTIONS\n 1:insertion\n 2:traversing\n 3:searching\n 4:addition at end \n 5:additon after a specific element\n 6:addtion at the beginning\n 7:deltion at the end\n 8:deletion after specific element\n 9:deletion at the beginning  0: Exit\n");
-scanf("%d",&a);
-switch(a)
-{
-    case 1:insertion();
-    break;
-    case 2:traverse();
-    break;
-    case 3:search();
-    break;
-    case 4:addend();
-    break;
-    case 5:addspec();
-    break;
-    case 6:addbeg();
-    break;
-    case 7:deleteend();
-    break;
-    case 8:deletespec();
-    break;
-    case 9:deletebeg();
-    break;
-    case 0:printf("Exiting\n");
-    break;
-    default:printf("invalid Entry\n");
-    break;
-}
 
-}while(a!=0);
+struct node *newnode,*current,*temp,*head=NULL,*last=NULL;
 
+void main(){
+	int choice;
+	do{
+		printf("\nOPTIONS\n 1:insertion\n 2:traversing\n 3:searching\n 4:addition at end \n 5:additon after a specific element\n 6:addtion at the beginning\n 7:deltion at the end\n 8:deletion after specific element\n 9:deletion at the beginning  0: Exit\n");
+		scanf("%d",&choice);
+		switch(a)
+		{
+    			case 1:insertion();
+    				break;
+    			case 2:traverse();
+    				break;
+    			case 3:search();
+    				break;
+    			case 4:addend();
+    				break;
+    			case 5:addspec();
+    				break;
+    			case 6:addbeg();
+    				break;
+    			case 7:deleteend();
+    				break;
+    			case 8:deletespec();
+    				break;
+    			case 9:deletebeg();
+    				break;
+    			case 0:printf("Exiting\n");
+   				 break;
+    			default:printf("invalid Entry\n");
+    				break;
+		}
+	}while(choice!=0);
 }
 
 void insertion()
@@ -67,7 +67,7 @@ void insertion()
 		{
 			head=newnode;
 			current=newnode;
-//last=current;
+			last=current;//tracking last member
 			newnode->prev=NULL;
 		}
 		else
@@ -75,10 +75,11 @@ void insertion()
 			current->next=newnode;
 			newnode->prev=current;
 			current=newnode;
-//last=current;
+			last=current;//tracking last member
 		}
 	}
 }
+
 void traverse()
 {
 	printf("Linked list:");
@@ -96,6 +97,7 @@ void traverse()
 		printf("NULL");
 	}
 }
+
 void search()
 {
 	int item,count=1;
@@ -121,6 +123,7 @@ void search()
 		}
 	}
 }
+
 void addend()
 {
 	newnode=(struct node*)malloc(sizeof(struct node));
@@ -131,6 +134,7 @@ void addend()
 	{
 		head=newnode;
 		newnode->prev=NULL;
+		last=newnode; //tracking last node
 	}
 	else
 	{
@@ -141,8 +145,10 @@ void addend()
 		}
 		newnode->prev=temp;
 		temp->next=newnode;
+		last=newnode; //tracking last node
 	}
 }
+
 void addspec()
 {
 	struct node *ptr;
@@ -165,11 +171,14 @@ void addspec()
 		{
 			ptr=ptr->next;
 		}
+		if(ptr->next==NULL)
+			last=newnode; //tracking last node
 		newnode->next=ptr->next;
 		newnode->prev=ptr;
 		ptr->next=newnode;
 	}
 }
+
 void addbeg()
 {
 	newnode=(struct node*)malloc(sizeof(struct node));
@@ -179,6 +188,7 @@ void addbeg()
 	newnode->next=head;
 	head=newnode;
 }
+
 void deleteend()
 {
 	struct node *preptr,*ptr;
@@ -208,6 +218,7 @@ void deleteend()
 		}
 	}	
 }
+
 void deletespec()
 {
 	struct node *preptr,*ptr;
@@ -234,6 +245,7 @@ void deletespec()
 		free(temp);
 	}	
 }
+
 void deletebeg()
 {
 	struct node *ptr;
@@ -250,4 +262,3 @@ void deletebeg()
 		free(ptr);
 	}
 }
-

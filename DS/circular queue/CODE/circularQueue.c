@@ -5,29 +5,32 @@
 int queue[MAX];
 int data,rear=-1,front=-1;
 
-int fullCheck(){
-	if((rear+1)%MAX == front || (front == 0 && rear == MAX-1))
-	{
+int isEmpty() {
+	if (front == -1) 
 		return 1;
-	}
 	return 0;
 }
 
-void enQueue(){
-	if(fullCheck())
-		printf(" Overflow.....! \n");
-	else
-		printf("Enter the data :");
-		scanf("%d",&data);
-		if (front == -1){
-			front = 0;
-		}
+int isFull() {
+  	if ((front == rear + 1) || (front == 0 && rear == MAX - 1)) 
+  		return 1;
+	return 0;
+}
+
+void enQueue(int element){
+	if (isFull())
+    		printf("\n Queue is full!! \n");
+  	else {
+    		if (front == -1)
+    			front = 0;
     		rear = (rear + 1) % MAX;
-    		queue[rear] = data;
+    		queue[rear] = element;
+		printf("\n Inserted -> %d", element);
+	}
 }
 
 void Top(){
-	if(front == -1 && rear==-1){
+	if(isEmpty()){
 		printf("Queue is empty...! \n");
 	}
 	else{
@@ -37,14 +40,16 @@ void Top(){
 
 void display() {
 	int i;
-	if (front == -1 && rear==-1)
-   		printf("Queue is Empty....! \n");
+	if (isEmpty())
+		printf(" \n Empty Queue\n");
 	else {
-    		printf("\n Items ->");
+		printf("\n Front -> %d ", front);
+    		printf("\n Items -> ");
     		for (i = front; i != rear; i = (i + 1) % MAX) {
-      			printf("%d ->", queue[i]);
+      			printf("%d ",queue[i]);
     		}
     		printf("%d ", queue[i]);
+    		printf("\n Rear -> %d \n", rear);
   	}
 }
 
@@ -65,14 +70,15 @@ void deQueue(){
 }
 
 void main(){
-	int choice;
+	int choice,element;
 	printf("\n OPTIONS: \n1.Enqueue \n2.Display Queue\n3.Display Front\n4.Dequeue\n0.Exit\n");
 	do{
 		printf("\nEnter the choice :");
 		scanf("%d",&choice);
 		switch(choice){
-			case 1 : {
-					enQueue();
+			case 1 : {	printf("Enter the element:");
+					scanf("%d",&element);
+					enQueue(element);
 					break;
 				 }
 			case 2 : {
