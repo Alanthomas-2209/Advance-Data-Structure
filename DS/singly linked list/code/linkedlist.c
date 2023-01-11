@@ -210,6 +210,8 @@ void deletespec()
 			preptr=ptr;
 			ptr=ptr->next;
 		}
+		if(ptr->next==NULL)
+			return;
 		temp=ptr;
 		printf("Deleted element :%d",ptr->data);
 		preptr->next=ptr->next;
