@@ -1,0 +1,5 @@
+token :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
+
+model : git push https://<GITHUB_ACCESS_TOKEN>@github.com/<GITHUB_USERNAME>/<REPOSITORY_NAME>.git
+
+use : git push https://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@github.com/Alanthomas-2209/Advance-Data-Structure.git
