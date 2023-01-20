@@ -172,3 +172,15 @@ void main(){
 		}
 	}while(choice != 0 );
 }
+
+//search
+/*
+If root == NULL 
+    return NULL;
+If number == root->data 
+    return root->data;
+If number < root->data 
+    return search(root->left)
+If number > root->data 
+    return search(root->right)
+*/
