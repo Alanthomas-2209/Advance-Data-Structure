@@ -72,7 +72,7 @@ entire tree does not need to be searched. */
 struct node *minValueNode(struct node *node){
 	struct node *current = node;
 	while (current && current->left != NULL)
-	current = current->left;
+		current = current->left;
 	return current;
 }
 
@@ -100,13 +100,28 @@ struct node *deleteNode(struct node *root, int key){
       			free(root);
       			return temp;
     		}
-    	// node with two children: Get the inorder successor (smallest in the right subtree)
-   	struct node *temp = minValueNode(root->right);
-   	root->data = temp->data;
-   	// Delete the inorder successor
-   	root->right = deleteNode(root->right, temp->data);
+    		// node with two children: Get the inorder successor (smallest in the right subtree)
+   		struct node *temp = minValueNode(root->right);
+   		root->data = temp->data;
+   		// Delete the inorder successor
+   		root->right = deleteNode(root->right, temp->data);
    	}
    	return root;
+}
+
+struct node* search(struct node* root, int key){
+    if(root==NULL){
+        return NULL;
+    }
+    if(key==root->data){
+        return root;
+    }
+    else if(key<root->data){
+        return search(root->left, key);
+    }
+    else{
+        return search(root->right, key);
+    }
 }
 
 //main function
@@ -115,7 +130,7 @@ void main(){
 
 	struct node* root = NULL;
 	int choice,data,i,n;
-	printf("OPTIONS:\n1.Creation of binary search tree \n2.Insertion of node\n3.Preorder traverse\n4.Inorder traverse\n5.Post order traverse \n6.Dispaly root node\n7.Deletion of node\n0.Exit\n");
+	printf("OPTIONS:\n1.Creation of binary search tree \n2.Insertion of node\n3.Preorder traverse\n4.Inorder traverse\n5.Post order traverse \n6.Dispaly root node\n7.Deletion of node\n8.search in bst\n0.Exit\n");
 	do{
 	
 		printf("\nEnter your choice :\n");
@@ -161,6 +176,18 @@ void main(){
 					root = deleteNode(root,data);
 					break;
 				 }
+			case 8 :{
+					printf("Enter element to search :");
+					scanf("%d",& data);
+					struct node* find = search(root, data);
+    					if(find!=NULL){
+    						printf("Found: %d", find->data);
+    					}
+    					else{
+        					printf("Element not found");
+    					}
+    					break;			
+				}
 			case 0 : {
 					printf("Exiting....!\n");
 					break;
